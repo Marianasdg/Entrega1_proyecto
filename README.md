@@ -1,4 +1,4 @@
-Resumen QC. 
+#**Resumen QC.** 
 
 En los datos crudos (PRE) las lecturas mostraron una calidad aceptable en general, aunque se observó la típica caída en la calidad hacia los extremos de las secuencias, algo muy común en datos de Illumina (Andrews, 2010). El contenido de GC presentó algunas advertencias, probablemente relacionadas con la composición particular del genoma del microorganismo, ya que este tipo de sesgos son normales en genomas pequeños o con regiones repetitivas (Schmieder & Edwards, 2011). También se detectó cierta variabilidad en la longitud de las lecturas y la presencia de secuencias sobre-representadas, lo que puede deberse a contaminantes o a regiones muy expresadas del genoma. A pesar de esto, los niveles de duplicación fueron aceptables y no se detectó un exceso de adaptadores. 
 
@@ -8,9 +8,7 @@ El análisis de ensamblaje con QUAST confirmó que el trimming tuvo un impacto p
 
 En resumen, el trimming resultó clave para mejorar los datos: eliminó errores y contaminantes, redujo advertencias en las métricas de calidad y permitió ensamblajes más confiables. Aunque se sacrificó una pequeña fracción de lecturas, los resultados muestran que se mantuvo la integridad del genoma y que las tres líneas (ancestral y evolutivas) pudieron ensamblarse con buena continuidad, en línea con lo que han reportado otros estudios en análisis de datos microbianos (Del Fabbro et al., 2013). 
 
-Discutir por qué se están empleando los reads de la línea ancestral, y no la línea 
-
-evolucionada, para ensamblar el genoma. 
+#**Discutir por qué se están empleando los reads de la línea ancestral, y no la línea evolucionada, para ensamblar el genoma.** 
 
 El propósito del presente proyecto es la identificación de un organismo a partir de su información genética. Para lograr esto, es necesario tener, en primer lugar, el genoma del organismo de interés y un genoma de referencia con el cual se pueda realizar una comparación que permita determinar si existen suficientes similitudes entre ambos que permitan caracterizar el organismo de interés.  
 
@@ -18,31 +16,21 @@ En este contexto, se emplean los reads de la línea ancestral para ensamblar el 
 
  
 
-Resultados de Quast. 
+#**Resultados de Quast.**
 
- 
-
-Definir y discutir las distintas métricas (N50, N90, auN, L50, L90). 
-
- 
+**Definir y discutir las distintas métricas (N50, N90, auN, L50, L90).** 
 
 N50: Corresponde a la longitud mínima de los contigs más largos que, en conjunto, cubren el 50 % del tamaño total del ensamblaje, en donde, un valor alto indica que gran parte del genoma está representada por contigs largos, lo que sugiere un ensamblaje más continuo y menos fragmentado (Miller et al., 2010). 
 
 En este caso, el ensamblaje de scaffolds_raw presenta un N50 de 57,404 bp, superior al de contigs_raw (48,050 bp) y también mayor al de los ensamblajes con trimming, lo que indica que los contigs en el ensamblaje sin trimming son en promedio más largos, es decir, que hay una mejor continuidad genómica y menor fragmentación. 
 
-  
-
 N90: Es la longitud mínima de los contigs que cubren el 90 % del ensamblaje, lo que permite evaluar la continuidad de la mayor parte del genoma, identificando si las secuencias que componen el ensamblaje en su tramo final son cortas o largas (Bradnam et al., 2013). 
 
 Para scaffolds_raw se obtiene un N90 de 13,786 bp, que también es superior al de contigs_raw (12,320 bp). Esto sugiere que incluso los contigs más pequeños que componen la mayor parte del genoma son relativamente largos, favoreciendo un ensamblaje más representativo y con menos gaps.  
 
- 
-
 auN: Representa el área bajo la curva Nx y resume la continuidad global del ensamblaje, además de que es menos sensible a valores atípicos (Pevzner et al., 2001). 
 
 En nuestro reporte se observa que el valor obtenido para scaffolds_raw (59,411.2) es mayor que en los otros ensamblajes (por ejemplo, 54,258.9 en contigs_raw). Por lo que, se puede confirmar que el ensamblaje de scaffolds es más uniforme y no está dominado por contigs extremadamente cortos o largos, reflejando una buena calidad general. 
-
-  
 
 L50: Indica el número mínimo de contigs que cubren el 50 % del ensamblaje. Pues bien, en cuanto menor sea este valor, más concentrada está la información genómica en pocos contigs, lo que indica un ensamblaje más robusto (Miller et al., 2010). 
 
@@ -52,17 +40,13 @@ L90: Es el número mínimo de contigs que cubren el 90 % del ensamblaje, en dond
 
 En nuestro caso, scaffolds_raw tiene un L90 de 92, mejor que los 100 contigs requeridos en contigs_raw. Por lo tanto, esto refuerza la idea de que la secuencia está concentrada en menos fragmentos, lo que es deseable para un ensamblaje de calidad. 
 
- 
-
- 
-
-Discutir si mejores métricas significan mejor ensamblaje. 
+ **Discutir si mejores métricas significan mejor ensamblaje.**
 
 Las métricas como N50, N90 y auN con valores altos, junto con valores bajos de métricas como L50 y L90, suelen asociarse con ensamblajes más continuos y menos fragmentados. No obstante, estos indicadores no siempre reflejan una mayor exactitud biológica, ya que un valor de N50 elevado puede deberse a misassemblies, es decir, uniones incorrectas de secuencias que generan errores en el ensamblaje (Bradnam et al., 2013). 
 
 Por ello, estas métricas deben ser interpretadas junto con otras evaluaciones, como la tasa de genes recuperados y la detección de errores de ensamblaje, usando herramientas como QUAST (Miller et al., 2010). Por lo tanto, se puede concluir que mejores métricas sugieren un ensamblaje más continuo, pero no garantizan que sea el más correcto biológicamente. 
 
-Comparar el ensamblaje de los datos crudos vs. los datos depurados por calidad. ¿Cuál ensamblaje prefieres y por qué? 
+**Comparar el ensamblaje de los datos crudos vs. los datos depurados por calidad. ¿Cuál ensamblaje prefieres y por qué?**
 
 Después de realizar el reporte y analizar los resultados de QUAST, se observa que el ensamblaje con datos crudos presenta mejores métricas de continuidad, como un N50 más alto (57,404 vs. 50,016 en el depurado) y menor fragmentación (L90 = 92 vs. 95). Sin embargo, esto no necesariamente implica que sea el mejor ensamblaje, ya que, un factor muy importante para tener en cuenta es el número de N’s por cada 100 kb, debido a que estos representan regiones donde el ensamblador no pudo determinar la secuencia real y dejó gaps (Bradnam et al., 2013).  Teniendo en cuenta lo anterior, se puede decir que el ensamblaje depurado tiene una secuencia más confiable debido a que presenta una menor cantidad de N’s en comparación con el ensamblaje de datos crudos (22.29 vs. 22.69). 
 
@@ -70,29 +54,20 @@ Este punto es clave, porque tener menos N’s significa que el ensamblaje está 
 
 Por lo tanto, se prefiere el ensamblaje generado con datos depurados, ya que, aunque presenta una ligera fragmentación adicional, es biológicamente más confiable y ofrece una representación más precisa del genoma. Esto asegura que, al realizar el mapeo, la tasa de alineación sea mayor y que los resultados observados en IGV sean más representativos y útiles para la detección de variantes (Robinson et al., 2011). 
 
-¿Qué significa y por qué se debe indexar el genoma? 
+#**¿Qué significa y por qué se debe indexar el genoma?**
 
- 
-
-Indexar el genoma hace referencia al proceso de generar archivos auxiliares que permiten acceder de forma rápida a cualquier posición de la secuencia de referencia. Pues bien, este proceso no modifica el genoma, sino que crea una especie de “mapa” que facilita a los alineadores (como BWA) ubicar eficientemente cada lectura en su posición correspondiente. 
+ Indexar el genoma hace referencia al proceso de generar archivos auxiliares que permiten acceder de forma rápida a cualquier posición de la secuencia de referencia. Pues bien, este proceso no modifica el genoma, sino que crea una especie de “mapa” que facilita a los alineadores (como BWA) ubicar eficientemente cada lectura en su posición correspondiente. 
 
 La indexación es necesaria porque el alineamiento de millones de lecturas sería computacionalmente muy costoso si el software tuviera que recorrer toda la secuencia cada vez que compara una lectura. No obstante, gracias al índice, el alineador puede buscar posiciones potenciales en tiempo mucho menor, haciendo que el mapeo sea más rápido y reproducible (Li & Durbin, 2009). 
 
  
-
-Si quiero ver en IGV el resultado de mi mapeo, ¿qué significa y por qué debo indexar el mapeo? 
-
- 
+#**Si quiero ver en IGV el resultado de mi mapeo, ¿qué significa y por qué debo indexar el mapeo?**
 
 Ver el resultado del mapeo en IGV significa explorar gráficamente cómo se alinearon las lecturas de secuenciación contra el genoma de referencia, permitiendo identificar regiones con buena cobertura, variantes, o posibles errores. 
 
-  
-
 Para esto es necesario indexar el mapeo, lo que consiste en generar un archivo auxiliar (.bai para archivos BAM) que funciona como un índice, permitiendo que IGV cargue de forma rápida únicamente la región del genoma que se desea visualizar, sin leer todo el archivo completo. Sin esta indexación, la carga de datos sería extremadamente lenta o incluso impráctica (Robinson et al., 2011) 
 
- 
-
-#*Interpretación de los resultados de las estadísticas de mapeo (Qualimap). *
+#**Interpretación de los resultados de las estadísticas de mapeo (Qualimap).**
 
 En la línea evolutiva 1, se obtuvieron cerca de dos millones de lecturas, de las cuales el 98.84% se alinearon al genoma de referencia derivado de la línea ancestral. Este porcentaje de mapeo es considerado muy alto en análisis de secuenciación, ya que indica una fuerte correspondencia entre las lecturas y la referencia, lo cual respalda la calidad de la preparación de la librería y del proceso de secuenciación (Li & Durbin, 2009). Además, el 97.74% de las lecturas estuvieron correctamente emparejadas, lo que sugiere que la gran mayoría de las secuencias se encuentran en la orientación y distancia esperada, lo cual es un indicador de integridad de los datos (Li et al., 2009). El bajo porcentaje de singletons (0.32%) confirma que casi todas las lecturas pudieron ser alineadas junto a su par, reduciendo la probabilidad de errores sistemáticos en el mapeo. 
 
@@ -101,7 +76,7 @@ En la línea evolutiva 2, los resultados fueron consistentes con los de la líne
 En conjunto, las estadísticas de mapeo de Qualimap muestran que ambas líneas evolutivas presentan tasas de alineamiento superiores al 98%, con una gran proporción de lecturas correctamente emparejadas y niveles bajos de singletons. Estos resultados indican que los genomas evolucionados conservan una alta similitud con el genoma ancestral, y que las diferencias que se identifiquen en análisis posteriores —como polimorfismos de un solo nucleótido (SNPs) o indeles— serán cambios puntuales más que reestructuraciones genómicas amplias. Esto concuerda con lo observado en estudios de evolución experimental, donde los genomas de las poblaciones evolucionadas suelen mantener una alta conservación global respecto al ancestro, mientras acumulan mutaciones específicas que reflejan adaptaciones al ambiente (Barrick & Lenski, 2013). 
 
 
-Bibliografía  
+#**Bibliografía**
 
 Andrews, S. (2010). FastQC: A quality control tool for high throughput sequence data. Babraham Bioinformatics. Disponible en: http://www.bioinformatics.babraham.ac.uk/projects/fastqc 
 
